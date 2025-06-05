@@ -1,0 +1,12 @@
+#
+*.env
+# 
+*.log
+# 
+.idea/
+#
+/build
+#
+.idea/
+#
+.vscode/
