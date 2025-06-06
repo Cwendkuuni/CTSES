@@ -1,0 +1,12 @@
+absl-py==2.3.0
+click==8.1.8
+codebleu==0.7.0
+joblib==1.5.1
+nltk==3.9.1
+numpy==2.0.2
+regex==2024.11.6
+rouge_score==0.1.2
+six==1.17.0
+tqdm==4.67.1
+tree-sitter==0.23.1
+tree-sitter-java==0.23.4
