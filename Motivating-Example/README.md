@@ -10,19 +10,23 @@ Although the functional behavior is identical, the versions differ in naming, st
 
 ## Files
 
-- `evaluate_similarity_metrics.py`: main script to compute similarity metrics.
+- `evaluate_similarity_metrics.py`: compute lexical similarity metrics (CodeBLEU, ROUGE-L, METEOR).
+- `cosine_similarity_metrics.py`: compute semantic similarity using CodeBERT, GraphCodeBERT, and OpenAI embeddings.
 - `requirements.txt`: list of required Python packages.
-- All data is **hardcoded in the script**, including both the original and the refactored test as string literals.
+- All data is **hardcoded in the scripts**, including both the original and the refactored test as string literals.
 
 ## Metrics Computed
 
-The script computes three widely used similarity metrics:
+The scripts compute the following similarity metrics:
 
-| Metric       | Description                                                                 |
-|--------------|-----------------------------------------------------------------------------|
-| **CodeBLEU** | Combines lexical n-gram, syntax tree, and dataflow similarity               |
-| **ROUGE-L**  | Measures longest common subsequence (F1 score) between raw text sequences   |
-| **METEOR**   | Accounts for exact, stemmed, and synonym matches at the word level          |
+| Metric           | Type       | Description                                                                 |
+|------------------|------------|-----------------------------------------------------------------------------|
+| **CodeBLEU**     | Lexical    | Combines lexical n-gram, syntax tree, and dataflow similarity               |
+| **ROUGE-L**      | Lexical    | Measures longest common subsequence (F1 score) between raw text sequences   |
+| **METEOR**       | Lexical    | Accounts for exact, stemmed, and synonym matches at the word level          |
+| **CodeBERT**     | Semantic   | Cosine similarity of transformer-based embeddings (microsoft/codebert-base) |
+| **GraphCodeBERT**| Semantic   | Cosine similarity of transformer-based embeddings (microsoft/graphcodebert) |
+| **OpenAI**       | Semantic   | Cosine similarity using `text-embedding-3-small` model via OpenAI API       |
 
 ## How to Run
 
@@ -34,13 +38,14 @@ source ctses_env/bin/activate
 pip install -r requirements.txt
 ```
 
-Then run the evaluation script:
+Then run the evaluation scripts:
 
 ```bash
 python evaluate_similarity_metrics.py
+python cosine_similarity_metrics.py
 ```
 
-You should obtain the following scores (as reported in the paper):
+You should obtain the following scores (as reported in the updated evaluation):
 
 ```
 ================================================================================
@@ -53,6 +58,13 @@ Evaluating similarity between EvoSuite and GPT-refactored test classes
   - Dataflow Match          : 0.4444444444444444
 [ROUGE-L]  F1 Measure        : 0.5676274944567629
 [METEOR]   Score             : 0.6546147527401318
+
+================================================================================
+Evaluating cosine similarity between EvoSuite and GPT-4o refactored test
+================================================================================
+[CodeBERT]        Cosine Similarity : 0.9989
+[GraphCodeBERT]   Cosine Similarity : 0.9967
+[OpenAI]          Cosine Similarity : 0.9701
 ================================================================================
 ```
 
@@ -62,7 +74,7 @@ Despite being functionally equivalent, the two test suites differ significantly 
 
 - **CodeBLEU** underperforms due to heavy penalization of lexical deviations (e.g., renaming `test0` to `testMainMethodThrows...`).
 - **ROUGE-L** and **METEOR** reflect partial alignment at the lexical level.
-- In the paper, we also report cosine similarities using embeddings (CodeBERT, GraphCodeBERT, OpenAI) — all above **0.96** — which better capture semantic equivalence.
+- **Cosine similarities using embeddings** (CodeBERT, GraphCodeBERT, OpenAI) are all above **0.96**, confirming strong semantic equivalence.
 
 ## Reference
 
@@ -75,8 +87,7 @@ This example is described in:
 
 ## Notes
 
-The script uses hardcoded test data to ensure reproducibility.
-
-It does not rely on reading .java files to avoid discrepancies due to encoding or formatting.
-
-The version of CodeBLEU used is a direct port of the official repository: https://github.com/microsoft/CodeXGLUE
+- The scripts use hardcoded test data to ensure reproducibility.
+- No `.java` file reading is needed to avoid encoding or formatting issues.
+- CodeBLEU version is from the official Microsoft repo: https://github.com/microsoft/CodeXGLUE
+- OpenAI embeddings require a `.env` file with a valid `OPENAI_API_KEY`.
