@@ -32,7 +32,7 @@ Approach/
 
 ---
 
-## 🧪 Evaluation Metrics
+## Evaluation Metrics
 
 We compute both **lexical/structural** metrics and **semantic** similarities:
 
