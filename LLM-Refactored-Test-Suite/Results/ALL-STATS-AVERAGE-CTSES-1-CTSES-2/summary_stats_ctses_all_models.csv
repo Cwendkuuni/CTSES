@@ -1,0 +1,25 @@
+Dataset,Model,Metric,Min,Q1,Median,Q3,Max,Mean,<0.5 %,>=0.5 %
+Defects4J,GPT 4-o,METEOR,0.14,0.62,0.7,0.76,1.0,0.69,4.57,95.43
+Defects4J,GPT 4-o,ROUGE-L,0.13,0.63,0.69,0.74,1.0,0.7,2.4,97.6
+Defects4J,GPT 4-o,CodeBLEU,0.19,0.51,0.56,0.61,1.0,0.58,17.55,82.45
+Defects4J,GPT 4-o,average_score_1,0.18,0.59,0.65,0.7,1.0,0.66,4.03,95.97
+Defects4J,GPT 4-o,CTSES_score_1,0.18,0.57,0.63,0.68,1.0,0.64,6.07,93.93
+Defects4J,GPT 4-o,CTSES_score_2,0.18,0.58,0.64,0.69,1.0,0.65,4.57,95.43
+SF110,Mistral large-2407,METEOR,0.15,0.69,0.76,0.85,0.98,0.76,2.02,97.98
+SF110,Mistral large-2407,ROUGE-L,0.23,0.72,0.79,0.88,1.0,0.79,1.35,98.65
+SF110,Mistral large-2407,CodeBLEU,0.25,0.6,0.69,0.79,0.98,0.69,6.69,93.31
+SF110,Mistral large-2407,average_score_1,0.21,0.68,0.74,0.84,0.99,0.75,2.08,97.92
+SF110,Mistral large-2407,CTSES_score_1,0.22,0.66,0.73,0.83,0.98,0.73,2.65,97.35
+SF110,Mistral large-2407,CTSES_score_2,0.21,0.67,0.74,0.83,0.99,0.74,2.2,97.8
+SF110,GPT 4-o,METEOR,0.08,0.6,0.67,0.75,0.98,0.66,9.74,90.26
+SF110,GPT 4-o,ROUGE-L,0.11,0.61,0.67,0.74,1.0,0.68,6.48,93.52
+SF110,GPT 4-o,CodeBLEU,0.14,0.48,0.54,0.62,0.97,0.55,35.67,64.33
+SF110,GPT 4-o,average_score_1,0.11,0.57,0.62,0.7,0.98,0.63,10.84,89.16
+SF110,GPT 4-o,CTSES_score_1,0.12,0.54,0.6,0.68,0.97,0.61,13.28,86.72
+SF110,GPT 4-o,CTSES_score_2,0.11,0.56,0.61,0.69,0.98,0.62,11.47,88.53
+Defects4J,Mistral large-2407,METEOR,0.25,0.71,0.76,0.81,1.0,0.77,0.76,99.24
+Defects4J,Mistral large-2407,ROUGE-L,0.27,0.74,0.79,0.86,1.0,0.8,0.41,99.59
+Defects4J,Mistral large-2407,CodeBLEU,0.29,0.62,0.68,0.76,1.0,0.7,3.89,96.11
+Defects4J,Mistral large-2407,average_score_1,0.28,0.69,0.74,0.8,1.0,0.76,0.64,99.36
+Defects4J,Mistral large-2407,CTSES_score_1,0.28,0.67,0.72,0.79,1.0,0.74,0.8,99.2
+Defects4J,Mistral large-2407,CTSES_score_2,0.28,0.68,0.74,0.8,1.0,0.75,0.61,99.39
