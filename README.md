@@ -4,7 +4,7 @@ This repository contains the full replication package for our paper:
 
 > **Evaluating LLM-Based Test Refactoring with a Behavior-Preserving Composite Metric**  
 
-CTSES is a **composite similarity metric** tailored for evaluating unit test **refactorings** produced by Large Language Models (LLMs). It integrates **CodeBLEU**, **METEOR**, and **ROUGE-L** to better assess **readability**, **structural clarity**, and **semantic preservation** in test code—addressing the limitations of surface-level metrics like CodeBLEU.
+CTSES is a **composite similarity metric** tailored for evaluating unit test **refactorings** produced by Large Language Models (LLMs). It integrates **CodeBLEU**, **METEOR**, and **ROUGE-L** to better assess **readability**, **structural clarity**, and **semantic preservation** in test code, addressing the limitations of surface-level metrics like CodeBLEU.
 
 ---
 
