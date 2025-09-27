@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 # ============================
-# Paths & config
+# Paths & configuration
 # ============================
 BASE_DIR = "/home/e113/Documents/Humanization-Project/HUMANIZATION/CODEBLEU-CRISTALBLEU/NEW-TESTS/NEW-FOR-ICSE-NIER-TRACK"
 MODELS = ["GPT 4o", "MISTRAL LARGE"]
@@ -11,12 +11,12 @@ DATASETS = ["Defects4J", "SF110"]
 
 N_PER_GROUP = 5
 
-# Seuils initiaux
+# Initial thresholds
 DELTA_HIGH = 0.15
 DELTA_LOW = -0.15
 DELTA_MID = 0.05
 
-# Seuils détendus si pas assez de cas
+# Relaxed thresholds if not enough cases
 DELTA_HIGH_RELAX = 0.10
 DELTA_LOW_RELAX = -0.10
 DELTA_MID_RELAX = 0.10
@@ -61,7 +61,7 @@ def load_and_merge(model, dataset):
                 "AVG": m["average_score_1"],          # Uniform average
                 "CTSES1": m["CTSES_score_1"],         # Semantic-prioritized (0.5 / 0.3 / 0.2)
                 "CTSES2": m["CTSES_score_2"],         # Readability-aware (0.4 / 0.3 / 0.3)
-                "delta": m["CTSES_score_1"] - m["CodeBLEU"],  # still based on CTSES1
+                "delta": m["CTSES_score_1"] - m["CodeBLEU"],  # Difference based on CTSES1
                 "original_test": p["original_test"],
                 "refactored_test": p["refactored_test"]
             })
@@ -97,7 +97,7 @@ def select_group(df, group, n=N_PER_GROUP):
 # ============================
 # Main pipeline
 # ============================
-# Charger toutes les données
+# Load all data
 all_data = []
 for model in MODELS:
     for dataset in DATASETS:
@@ -106,7 +106,7 @@ for model in MODELS:
 df = pd.DataFrame(all_data)
 print(f"Total merged samples: {len(df)}")
 
-# Sélection représentative
+# Representative selection
 selected = pd.concat([
     select_group(df, "G1"),
     select_group(df, "G2"),
@@ -115,7 +115,7 @@ selected = pd.concat([
 
 print(f"Selected {len(selected)} cases total.")
 
-# Sauvegarde CSV + JSONL
+# Save as CSV and JSONL
 out_csv = "selected_refactorings_15.csv"
 out_jsonl = "selected_refactorings_15.jsonl"
 
@@ -126,4 +126,3 @@ with open(out_jsonl, "w") as f:
         f.write(json.dumps(row.to_dict()) + "\n")
 
 print(f"Saved {out_csv} and {out_jsonl}")
-

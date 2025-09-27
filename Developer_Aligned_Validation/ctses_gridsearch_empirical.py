@@ -2,32 +2,32 @@ import pandas as pd
 import numpy as np
 import itertools
 
-# Charger le fichier consolidé
+# Load the consolidated file
 df = pd.read_excel("consolidated_annotations_clean.xlsx", sheet_name="Consolidated")
 
-# Labels humains (Yes=1, No=0)
+# Human labels (Yes=1, No=0)
 y_true = df["Clarity_Consensus"].map({"Yes": 1, "No": 0}).astype(float)
 
-# Récupérer les trois métriques de base
+# Retrieve the three base metrics
 codebleu = df["CodeBLEU"].astype(float).values
 meteor = df["METEOR"].astype(float).values
 rouge = df["ROUGE-L"].astype(float).values
 
 results = []
 
-# Grid search pas de 0.1
+# Grid search with step size 0.1
 steps = np.arange(0, 1.1, 0.1)
 for alpha, beta, gamma in itertools.product(steps, steps, steps):
     if abs(alpha + beta + gamma - 1.0) > 1e-6:
         continue
     
-    # Calcul du CTSES pour cette config
+    # Compute CTSES for this configuration
     scores = alpha * codebleu + beta * meteor + gamma * rouge
     
-    # MAE continu
+    # Continuous MAE
     mae = np.mean(np.abs(y_true - scores))
     
-    # FN@0.5 (cas où y=1 mais score<0.5)
+    # FN@0.5 (cases where y=1 but score < 0.5)
     fn_keys = df.loc[(y_true == 1) & (scores < 0.5), "key"].tolist()
     fn_count = len(fn_keys)
     
@@ -40,13 +40,12 @@ for alpha, beta, gamma in itertools.product(steps, steps, steps):
         "FN_Keys": ",".join(fn_keys)
     })
 
-# Résultats triés par MAE croissant puis FN
+# Results sorted by ascending MAE then FN
 results_df = pd.DataFrame(results).sort_values(by=["MAE", "FN@0.5"]).reset_index(drop=True)
 
-print("🔍 Top 10 configurations (sorted by MAE then FN):")
+print("Top 10 configurations (sorted by MAE then FN):")
 print(results_df.head(10))
 
-# Sauvegarde complète
+# Save complete results
 results_df.to_excel("ctses_gridsearch_results.xlsx", index=False)
-print("✅ Saved: ctses_gridsearch_results.xlsx")
-
+print("Saved: ctses_gridsearch_results.xlsx")

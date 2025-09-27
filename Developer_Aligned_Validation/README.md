@@ -32,6 +32,8 @@ It complements the large-scale evaluation by directly comparing metric scores wi
   Computes MAE and false negatives by comparing metric scores against developer consensus.  
 - **`ctses_gridsearch_empirical.py`**  
   Runs a grid search over CTSES weights `(α, β, γ)` to evaluate empirical trade-offs.  
+- **`get_consolidated_annotations.py`**  
+  Builds the consolidated annotation file from the three developer spreadsheets.
 
 ---
 
@@ -46,12 +48,17 @@ It complements the large-scale evaluation by directly comparing metric scores wi
 
 ## Usage
 
-1. **Run consensus analysis (MAE + FN):**
+1. **Build consolidated file from individual annotations:**
+   ```bash
+   python3 get_consolidated_annotations.py
+   ```
+
+2. **Run consensus analysis (MAE + FN):**
    ```bash
    python3 analyse_human_evaluation.py
    ```
 
-2. **Reproduce weight grid search:**
+3. **Reproduce weight grid search:**
    ```bash
    python3 ctses_gridsearch_empirical.py
    ```

@@ -1,0 +1,5 @@
+Metric,MAE_Continuous,FN@0.5_Count,FN@0.5_Keys
+AVG,0.40128,4,"Defects4J::RandomStringUtils::iter-1,SF110::CompareToBuilder::iter-2,SF110::XPathLexer::iter-1,SF110::XPathLexer::iter-2"
+CTSES2,0.404453,4,"Defects4J::RandomStringUtils::iter-1,SF110::CompareToBuilder::iter-2,SF110::XPathLexer::iter-1,SF110::XPathLexer::iter-2"
+CTSES1,0.40666,4,"Defects4J::RandomStringUtils::iter-1,SF110::CompareToBuilder::iter-2,SF110::XPathLexer::iter-1,SF110::XPathLexer::iter-2"
+CodeBLEU,0.432893,4,"Defects4J::TarUtils::iter-3,SF110::CompareToBuilder::iter-2,SF110::XPathLexer::iter-1,SF110::XPathLexer::iter-2"
