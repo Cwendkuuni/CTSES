@@ -21,6 +21,15 @@ It complements the large-scale evaluation by directly comparing metric scores wi
   Subset of 15 representative refactorings sampled from Defects4J and SF110 for validation.  
 - **`SF110_XPathLexer_iter-2.jsonl`**  
   Case study example (false negative) highlighted in the paper.  
+- **`CSV_Version/`**  
+  Contains equivalent `.csv` versions of all Excel files for easier parsing:
+  - `DevA_annotations_clean_exact.csv`  
+  - `DevB_annotations_clean_exact.csv`  
+  - `DevC_annotations_clean_exact.csv`  
+  - `DevX_annotations_Empty.csv`  
+  - `consolidated_annotations_clean.csv`  
+  - `mae_fn_simple.csv`  
+  - `ctses_gridsearch_results.csv`  
 
 ---
 
@@ -33,7 +42,7 @@ It complements the large-scale evaluation by directly comparing metric scores wi
 - **`ctses_gridsearch_empirical.py`**  
   Runs a grid search over CTSES weights `(α, β, γ)` to evaluate empirical trade-offs.  
 - **`get_consolidated_annotations.py`**  
-  Builds the consolidated annotation file from the three developer spreadsheets.
+  Builds the consensus file by merging developer annotations (A, B, C) using majority vote.
 
 ---
 
@@ -48,19 +57,19 @@ It complements the large-scale evaluation by directly comparing metric scores wi
 
 ## Usage
 
-1. **Build consolidated file from individual annotations:**
-   ```bash
-   python3 get_consolidated_annotations.py
-   ```
-
-2. **Run consensus analysis (MAE + FN):**
+1. **Run consensus analysis (MAE + FN):**
    ```bash
    python3 analyse_human_evaluation.py
    ```
 
-3. **Reproduce weight grid search:**
+2. **Reproduce weight grid search:**
    ```bash
    python3 ctses_gridsearch_empirical.py
+   ```
+
+3. **Rebuild consolidated annotations from developer files:**
+   ```bash
+   python3 get_consolidated_annotations.py
    ```
 
 ---
@@ -69,5 +78,6 @@ It complements the large-scale evaluation by directly comparing metric scores wi
 
 - Three developers annotated all 15 refactorings independently.  
 - Consensus was derived by majority vote (2/3).  
+- Both `.xlsx` and `.csv` formats are provided for flexibility.  
 - Annotations, scripts, and results are released to ensure full transparency and replicability.  
 - These artifacts support Section *Developer-Aligned Validation* in the paper.
